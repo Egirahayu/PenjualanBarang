@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun FormPencatatanBarang(penjualanbarangDao: penjualanbarangDao) {
     val nama = remember { mutableStateOf(TextFieldValue("")) }
+    val jenis = remember { mutableStateOf(TextFieldValue("")) }
     val stok = remember { mutableStateOf(TextFieldValue("")) }
     val harga = remember { mutableStateOf(TextFieldValue("")) }
     val scope = rememberCoroutineScope()
@@ -37,10 +38,21 @@ fun FormPencatatanBarang(penjualanbarangDao: penjualanbarangDao) {
         .padding(10.dp)
         .fillMaxWidth()) {
         OutlinedTextField(
-            label = { Text(text = "Nama Barang") },
+            label = { Text(text = "Nama") },
             value = nama.value,
             onValueChange = {
                 nama.value = it
+            },
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
+            placeholder = { Text(text = "XXXXX") }
+        )
+        OutlinedTextField(
+            label = { Text(text = "Jenis") },
+            value = jenis.value,
+            onValueChange = {
+                jenis.value = it
             },
             modifier = Modifier
                 .padding(4.dp)
@@ -87,11 +99,12 @@ fun FormPencatatanBarang(penjualanbarangDao: penjualanbarangDao) {
             Button(modifier = Modifier.weight(5f), onClick = {
                 val id = uuid4().toString()
                 val item = penjualanbarang(id, nama.value.text,
-                    stok.value.text, harga.value.text)
+                    jenis.value.text, stok.value.text, harga.value.text)
                 scope.launch {
                     penjualanbarangDao.insertAll(item)
                 }
                 nama.value = TextFieldValue("")
+                jenis.value = TextFieldValue("")
                 stok.value = TextFieldValue("")
                 harga.value = TextFieldValue("")
             }, colors = loginButtonColors) {
@@ -105,6 +118,7 @@ fun FormPencatatanBarang(penjualanbarangDao: penjualanbarangDao) {
             }
             Button(modifier = Modifier.weight(5f), onClick = {
                 nama.value = TextFieldValue("")
+                jenis.value = TextFieldValue("")
                 stok.value = TextFieldValue("")
                 harga.value = TextFieldValue("")
             }, colors = resetButtonColors) {

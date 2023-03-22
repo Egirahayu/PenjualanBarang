@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class penjualanbarang(
     @PrimaryKey val id: String,
     val nama: String,
+    val jenis: String,
     val stok: String,
     val harga: String
 )

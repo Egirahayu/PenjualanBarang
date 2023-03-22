@@ -41,8 +41,13 @@ fun PengelolaanBarangScreen() {
                     .fillMaxWidth()) {
 
                     Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Nama Barang", fontSize = 14.sp)
+                        Text(text = "Nama", fontSize = 14.sp)
                         Text(text = item.nama, fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.weight(3f)) {
+                        Text(text = "Jenis", fontSize = 14.sp)
+                        Text(text = item.jenis, fontSize = 16.sp,
                             fontWeight = FontWeight.Bold)
                     }
                     Column(modifier = Modifier.weight(3f)) {
